@@ -12,8 +12,7 @@
 <meta property="og:site_name" content="小鹿的Blog">
 <meta property="og:description" content="10.1 节点层次DOM可以将任何HTML或XML文档描绘成一个由多层节点构成的结构。以下面的HTML为例： &amp;lt;html&amp;gt;         &amp;lt;head&amp;gt;             &amp;lt;title&amp;gt;Sample Page&amp;lt;/title&amp;gt;         &amp;lt;/head&amp;gt;         &amp;lt;body&amp;gt;             &amp;lt;p">
 <meta property="og:image" content="http://images2017.cnblogs.com/blog/1009007/201708/1009007-20170810153803870-83760900.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/07/DOM/myimage.gif">
-<meta property="og:updated_time" content="2017-10-07T13:20:27.291Z">
+<meta property="og:updated_time" content="2017-10-07T13:25:48.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOM">
 <meta name="twitter:description" content="10.1 节点层次DOM可以将任何HTML或XML文档描绘成一个由多层节点构成的结构。以下面的HTML为例： &amp;lt;html&amp;gt;         &amp;lt;head&amp;gt;             &amp;lt;title&amp;gt;Sample Page&amp;lt;/title&amp;gt;         &amp;lt;/head&amp;gt;         &amp;lt;body&amp;gt;             &amp;lt;p">
@@ -57,7 +56,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -199,10 +198,30 @@ var url = document.referrer;
 <p>1、getElementById()，接收一个参数：要取得的元素的ID。</p>
 <p>注意：IE8以及低版本不区分ID的大小写，因此“myDiv”和“mydiv”会被当做相同的元素ID。</p>
 <p>如果页面中多个元素的ID值相同，getElementById()只返回文档中第一次出现的元素。IE7及较低版本还为此方法添加了一个有意思的“怪癖”：name特性与给定ID匹配的表单元素也会被该方法返回。如果有哪个表单元素的name特性等于指定的ID，而且该元素在文档中位于带有给定ID的冤死前面，那么IE就会返回那个表单元素。</p>
-<p><input type="text" name="myElement" value="Text field"></p>
-<div id="myElement">A div</div><br>基于上述代码，在IE7中调用document。getElementById(“myElement”)，结果会返回<input>元素；而在其他浏览器中，都会返回对<div>元素的引用。<br><br>2、getElementsByTagName();接收一个参数：即要取得元素的标签名，而返回的是包含零或多个元素的NodeList。<br><br>var images = document.getElementsByTagName(“img”);<br>与NodeList对象类似，可以使用方括号语法或者item()方法来访问HTMLCollection对象中的项。而这个对象中元素的数量则可以通过其length属性取得<br><br>    alert(images.length);  //输出图像的数量<br>    alert(images[0].src);   //输出第一个图像元素的src特性<br>    alert(images.item(0).src);   //输出第一个图像元素的src特性<br>HTMLCollection对象还有一个方法，叫做namedItem()，使用这个方法可以通过元素的name特性取得集合中的项。<br><br>    <img src="myimage.gif" name="myImage"><br>可以通过以下方式从images变量中取得这个<img>元素<br>var myImage = images.namedItem(“myImage”);<br>对命名的项也可以使用方括号语法来访问<br>var myImage = images.namedItem{[“myImage”];<br>可以向getElementsByTagName()中传入“<em>”。在JavaScript及css中，星号（“</em>”）通常表示全部。<br><br>var allElements = document.getElementsByTagName(“*”);包含整个页面的所有元素——按照它们出现的先后顺序。<br><br>3、getElementsByName()这个方法会返回带有给定name特性的所有元素<br><br>4、特殊集合<br><br>document.anchors  包含文档中所有带name特性的<a></a>元素<br><br>document.forms 包含文档中所有的<form>元素，与document.getElementsByTagName(“form”)得到的结果相同<br><br>document.images 包含文档中所有的<img>元素，与document.getElementsByTagName(“img”)得到的结果相同<br><br>document.links 包含文档中所有带href特性的<a></a>元素<br><br>## 10.1.3 element类型 ##<br>element类型是web编程中最常见的类型了。element类型用于表现xml或html元素，提供对元素标签名、子节点及特性的访问。<br><br>要访问元素的标签名，可以使用nodename属性，也可以使用tagname属性；这两个属性会返回相同的值。<br><br>    <div id="myDiv"></div>
+<pre><code>&lt;input type=&quot;text&quot; name=&quot;myElement&quot; value=&quot;Text field&quot;&gt;
+&lt;div id=&quot;myElement&quot;&gt;A div&lt;/div&gt;
+</code></pre><p>基于上述代码，在IE7中调用<code>document。getElementById(&quot;myElement&quot;)</code>，结果会返回<code>&lt;input&gt;</code>元素；而在其他浏览器中，都会返回对<div>元素的引用。</div></p>
+<p>2、getElementsByTagName();接收一个参数：即要取得元素的标签名，而返回的是包含零或多个元素的NodeList。</p>
+<pre><code>var images = document.getElementsByTagName(&quot;img&quot;);
+</code></pre><p>与NodeList对象类似，可以使用方括号语法或者item()方法来访问HTMLCollection对象中的项。而这个对象中元素的数量则可以通过其length属性取得</p>
+<pre><code>alert(images.length);  //输出图像的数量
+alert(images[0].src);   //输出第一个图像元素的src特性
+alert(images.item(0).src);   //输出第一个图像元素的src特性
+</code></pre><p>HTMLCollection对象还有一个方法，叫做namedItem()，使用这个方法可以通过元素的name特性取得集合中的项。</p>
+<pre><code>&lt;img src=&quot;myimage.gif&quot; name=&quot;myImage&quot; &gt;
+</code></pre><p>可以通过以下方式从images变量中取得这个<img>元素<br>var myImage = images.namedItem(“myImage”);<br>对命名的项也可以使用方括号语法来访问<br>var myImage = images.namedItem{[“myImage”];<br>可以向getElementsByTagName()中传入<em>“</em>”。在JavaScript及css中，星号（“<em>”）</em>通常表示全部。</p>
+<p><code>var allElements = document.getElementsByTagName(&quot;*&quot;);</code>包含整个页面的所有元素——按照它们出现的先后顺序。</p>
+<p>3、getElementsByName()这个方法会返回带有给定name特性的所有元素</p>
+<p>4、特殊集合</p>
+<p>document.anchors  包含文档中所有带name特性的<a></a>元素</p>
+<p>document.forms 包含文档中所有的<form>元素，与document.getElementsByTagName(“form”)得到的结果相同</form></p>
+<p>document.images 包含文档中所有的<img>元素，与document.getElementsByTagName(“img”)得到的结果相同</p>
+<p>document.links 包含文档中所有带href特性的<a></a>元素</p>
+<h2 id="10-1-3-element类型"><a href="#10-1-3-element类型" class="headerlink" title="10.1.3 element类型"></a>10.1.3 element类型</h2><p>element类型是web编程中最常见的类型了。element类型用于表现xml或html元素，提供对元素标签名、子节点及特性的访问。</p>
+<p>要访问元素的标签名，可以使用nodename属性，也可以使用tagname属性；这两个属性会返回相同的值。</p>
+<pre><code>&lt;div id=&quot;myDiv&quot;&gt;&lt;/div&gt;
 
-<pre><code>var div = document.getElementById(&quot;myDiv&quot;);
+var div = document.getElementById(&quot;myDiv&quot;);
 alert(div.tagName);  //&quot;DIV&quot;
 alert(div.tagName == div.nodeName);  //true;
 </code></pre><p><strong>1、取得特性</strong><br>每个元素都有一个或多个特性，这些特性的用途是给出相应元素或其内容的附加信息。操作特性的DOM方法有三个：getAttribute()、    setAttribute()、removeAttribute()</p>
@@ -211,7 +230,8 @@ alert(div.getAttribute(&quot;id&quot;));  //&quot;myDiv&quot;
 alert(div.getAttribute(&quot;class&quot;); // &quot;bd&quot;
 </code></pre><p><strong>2、设置特性</strong></p>
 <p>与getAttribute()对应的方法是setAttribute()。这个方法接受两个参数：要设置的特性名和值。</p>
-<p>div.setAttribute(“id”,”someOtherId”);<br><strong>3、删除特性</strong></p>
+<pre><code>div.setAttribute(&quot;id&quot;,&quot;someOtherId&quot;);
+</code></pre><p><strong>3、删除特性</strong></p>
 <p>removeAttribute()这个方法用于彻底删除元素的特性，调用这个方法不仅会清楚特性的值，而且会从元素中完全删除特性</p>
 <pre><code>div.removeAttribute(&quot;class&quot;);
 </code></pre><p><strong>4、attributes属性</strong></p>
@@ -224,8 +244,9 @@ var id = element.attributes[&quot;id&quot;].nodeValue;
 　　attrValue = element.attributes[i].nodeValue;
 }
 </code></pre><p><strong>5、创建元素</strong></p>
-<p>document.createElement()可以创建新元素</p>
-<p>var div = document.createElement(“div”);<br><strong>6、元素的子节点</strong></p>
+<p><code>document.createElement()</code>可以创建新元素</p>
+<pre><code>var div = document.createElement(&quot;div&quot;);
+</code></pre><p><strong>6、元素的子节点</strong></p>
 <p>使用children、firstElementChild、lastElementChild、nextElementSlibling、parentNode可以取得element元素，避免其他类型节点</p>
 <h2 id="10-1-4-文本节点"><a href="#10-1-4-文本节点" class="headerlink" title="10.1.4 文本节点"></a>10.1.4 文本节点</h2><p>文本节点有text类型表示，包含的是可以照字面解释的纯文本内容。</p>
 <p><strong>1、创建文本节点</strong></p>
@@ -279,11 +300,11 @@ frament.appendChild(li);
 }
 
 ul.appendChild(fragment);
-</code></pre></form></div>
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/DOM/" data-id="cj8hcl2vc00010sm61gibdf30" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/10/07/DOM/" data-id="cj8hcru530001xom6ac001n4j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +315,7 @@ ul.appendChild(fragment);
   
   
     <a href="/2017/10/07/BOM/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">BOM</div>
     </a>
   
@@ -312,7 +333,7 @@ ul.appendChild(fragment);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
     </div>
@@ -331,7 +352,7 @@ ul.appendChild(fragment);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
     </div>
@@ -341,7 +362,7 @@ ul.appendChild(fragment);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
