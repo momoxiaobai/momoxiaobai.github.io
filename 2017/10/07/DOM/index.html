@@ -3,20 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>理解e.clientX,e.pageX,e.offsetX | 小鹿的Blog</title>
+  <title>DOM | 小鹿的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="event.clientX、event.clientY 鼠标相对于浏览器窗口可视区域的X，Y坐标（窗口坐标），可视区域不包括工具栏和滚动条。IE事件和标准事件都定义了这2个属性 event.pageX、event.pageY 类似于event.clientX、event.clientY，但它们使用的是文档坐标而非窗口坐标。这2个属性不是标准属性，但得到了广泛支持。IE事件中没有这2个属性。 eve">
-<meta property="og:type" content="article">
-<meta property="og:title" content="理解e.clientX,e.pageX,e.offsetX">
-<meta property="og:url" content="http://yoursite.com/2017/10/07/理解e-clientX-e-pageX-e-offsetX/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="DOM">
+<meta property="og:url" content="http://yoursite.com/2017/10/07/DOM/index.html">
 <meta property="og:site_name" content="小鹿的Blog">
-<meta property="og:description" content="event.clientX、event.clientY 鼠标相对于浏览器窗口可视区域的X，Y坐标（窗口坐标），可视区域不包括工具栏和滚动条。IE事件和标准事件都定义了这2个属性 event.pageX、event.pageY 类似于event.clientX、event.clientY，但它们使用的是文档坐标而非窗口坐标。这2个属性不是标准属性，但得到了广泛支持。IE事件中没有这2个属性。 eve">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/1009007/201702/1009007-20170223112832882-336762012.png">
-<meta property="og:updated_time" content="2017-10-07T08:40:55.419Z">
+<meta property="og:updated_time" content="2017-10-07T13:05:58.806Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="理解e.clientX,e.pageX,e.offsetX">
-<meta name="twitter:description" content="event.clientX、event.clientY 鼠标相对于浏览器窗口可视区域的X，Y坐标（窗口坐标），可视区域不包括工具栏和滚动条。IE事件和标准事件都定义了这2个属性 event.pageX、event.pageY 类似于event.clientX、event.clientY，但它们使用的是文档坐标而非窗口坐标。这2个属性不是标准属性，但得到了广泛支持。IE事件中没有这2个属性。 eve">
-<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/1009007/201702/1009007-20170223112832882-336762012.png">
+<meta name="twitter:title" content="DOM">
   
     <link rel="alternate" href="/atom.xml" title="小鹿的Blog" type="application/atom+xml">
   
@@ -65,10 +60,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-理解e-clientX-e-pageX-e-offsetX" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-DOM" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/07/理解e-clientX-e-pageX-e-offsetX/" class="article-date">
-  <time datetime="2017-10-07T07:31:49.000Z" itemprop="datePublished">2017-10-07</time>
+    <a href="/2017/10/07/DOM/" class="article-date">
+  <time datetime="2017-10-07T13:05:58.000Z" itemprop="datePublished">2017-10-07</time>
 </a>
     
   </div>
@@ -79,7 +74,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      理解e.clientX,e.pageX,e.offsetX
+      DOM
     </h1>
   
 
@@ -87,19 +82,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>event.clientX、event.clientY</p>
-<p>鼠标相对于浏览器窗口可视区域的X，Y坐标（窗口坐标），可视区域不包括工具栏和滚动条。IE事件和标准事件都定义了这2个属性</p>
-<p>event.pageX、event.pageY</p>
-<p>类似于event.clientX、event.clientY，但它们使用的是文档坐标而非窗口坐标。这2个属性不是标准属性，但得到了广泛支持。IE事件中没有这2个属性。</p>
-<p>event.offsetX、event.offsetY</p>
-<p>鼠标相对于事件源元素（srcElement）的X,Y坐标，只有IE事件有这2个属性，标准事件没有对应的属性。</p>
-<p>event.screenX、event.screenY</p>
-<p>鼠标相对于用户显示器屏幕左上角的X,Y坐标。标准事件和IE事件都定义了这2个属性<br><img src="http://images2015.cnblogs.com/blog/1009007/201702/1009007-20170223112832882-336762012.png" alt=""></p>
-
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/理解e-clientX-e-pageX-e-offsetX/" data-id="cj8hcdgh90008n4m6jiuvejwv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/DOM/" data-id="cj8hcdgf70000n4m6rzbxdqyp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -108,19 +95,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/10/07/css实现折叠面板/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          css实现折叠面板
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/01/hello-blog/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/10/07/BOM/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">hello blog</div>
+      <div class="article-nav-title">BOM</div>
     </a>
   
 </nav>
