@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>BOM | 小鹿的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、窗口位置用来确定和修改window对象位置的属性和方法有很多。IE、Safari、Opera和Chrome都提供了screenLeft和screenTop属性，分别用于表示窗口相对于屏幕左边和上边的位置。FireFox则在screenX和screenY属性中提供相同的窗口位置信息，Safari和Chrome也同时支持者两个属性。跨浏览器取得窗口左边和上边的位置代码： var leftPos =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BOM">
+<meta property="og:url" content="http://yoursite.com/2017/10/07/BOM/index.html">
+<meta property="og:site_name" content="小鹿的Blog">
+<meta property="og:description" content="1、窗口位置用来确定和修改window对象位置的属性和方法有很多。IE、Safari、Opera和Chrome都提供了screenLeft和screenTop属性，分别用于表示窗口相对于屏幕左边和上边的位置。FireFox则在screenX和screenY属性中提供相同的窗口位置信息，Safari和Chrome也同时支持者两个属性。跨浏览器取得窗口左边和上边的位置代码： var leftPos =">
+<meta property="og:updated_time" content="2017-10-07T12:21:43.837Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BOM">
+<meta name="twitter:description" content="1、窗口位置用来确定和修改window对象位置的属性和方法有很多。IE、Safari、Opera和Chrome都提供了screenLeft和screenTop属性，分别用于表示窗口相对于屏幕左边和上边的位置。FireFox则在screenX和screenY属性中提供相同的窗口位置信息，Safari和Chrome也同时支持者两个属性。跨浏览器取得窗口左边和上边的位置代码： var leftPos =">
+  
+    <link rel="alternate" href="/atom.xml" title="小鹿的Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小鹿的Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-BOM" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/07/BOM/" class="article-date">
+  <time datetime="2017-10-07T12:13:28.000Z" itemprop="datePublished">2017-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BOM
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1、窗口位置</strong><br>用来确定和修改window对象位置的属性和方法有很多。IE、Safari、Opera和Chrome都提供了screenLeft和screenTop属性，分别用于表示窗口相对于屏幕左边和上边的位置。FireFox则在screenX和screenY属性中提供相同的窗口位置信息，Safari和Chrome也同时支持者两个属性。跨浏览器取得窗口左边和上边的位置代码：</p>
+<pre><code>var leftPos = (typeof window.screenLeft == &quot;number&quot;)?
+                        window.screenLeft : window.screenX;
+var topPos = (typeof window.screenTop == &quot;number&quot;)?
+                        window.screenTop : window.screenY;`
+移动窗口
+
+复制代码
+//将窗口移动到屏幕左上角
+window.moveTo(0,0);
+
+//将窗口向下移动100像素 
+window.moveBy(0,100);
+
+//将窗口移动到（200,300）
+window.moveTo(200,300);
+
+//将窗口想左移动50像素
+window.moveBy(-50,0);
+</code></pre><h1 id="2、窗口大小"><a href="#2、窗口大小" class="headerlink" title="2、窗口大小"></a>2、窗口大小</h1><p>IE9+、FireFox、Safari、Opera、Chrome均为此提供了4个属性：innerWidth、innerHeight、outerWidth和outerHeight。</p>
+<p>在IE9+、Safari和FireFox中，outerWidth和outerHeight返回浏览器本身的尺寸。在Opera中，这两个属性的值表示页面视图容器的大小，而innerWidth和innerHeight则表示该容器中页面视图区的大小（减去边框宽度）。在Chrome中，outerWidth、outerHeight与innerWidth和innerHeight返回相同的值，即视口大小而非浏览器窗口大小。</p>
+<p>在主流浏览器中，document.documentElement.clientWidth和document.documentElement.clientHeight中保存了页面视口的信息。</p>
+<p>在IE6中，这些属性必须在标准模式下才有效；如果是混杂模式，就必须通过document.body.clientWidth和document.body.clientHeight取得相同信息。</p>
+<p>取得页面视口的大小代码：</p>
+<pre><code>var pageWidth = window.innerWidth,
+      pageHeight = window.innerHeight;
+
+if(typeof pageWidth != &quot;number&quot;){
+
+       if(document.compatMode == &quot;CSS1Compat&quot;){
+                pageWidth = document.documentElement.clientWidht;
+                pageHeight = document.documentElement.clientHeight;
+        }else{
+                pageWidht = document.body.clientWidht;
+                pageHeight = docuemnt.body.clientHeight;
+         }
+}
+</code></pre><p>另外，使用resizeTo()和resizeBy()方法可以调整浏览器窗口的大小。</p>
+<pre><code>//调整到100X100
+window.resizeTo(100,100);
+
+//调整到200X150
+window.resizeBy(100,50);
+
+//调整到300X300
+window.resizeTo(300,300);
+</code></pre><p>#<br>3、导航和打开窗口 #<br>使用window.open()打开窗口既可以导航到一个特定的URL，也可以打开一个新的浏览器窗口。</p>
+<p>这个方法可以接收4个参数：要加载的URL、窗口目标、一个特性字符串以及一个表示新页面是否取代浏览器历史记录中当前加载页面的布尔值。</p>
+<p>如果为window.open()传递了第二个参数，而且该参数是已有窗口或框架的名称，那么就会在具有该名称的窗口或者框架中加载第一个参数指定的URL</p>
+<p>//等同于&lt;a href=”http”//www.wrof.com” target=”topFrame”&gt;<br>window.open(“<a href="http://www.wrox.com/&quot;,&quot;topFrame" target="_blank" rel="external">http://www.wrox.com/&quot;,&quot;topFrame</a>“);<br>调用这行代码，就如同用户单击了href属性为<a href="http://www.wrox.com/，target属性为“topFrame”的链接。如果有一个名叫“topFrame”的窗口或者框架，就会在该窗口或框架加载这个URL；否则，就会创建一个新窗口并将其命名为‘topFrame’。此外，第二个参数也可以是下列任何一个特殊的窗口名称：_self、_parent、_top或_blank" target="_blank" rel="external">http://www.wrox.com/，target属性为“topFrame”的链接。如果有一个名叫“topFrame”的窗口或者框架，就会在该窗口或框架加载这个URL；否则，就会创建一个新窗口并将其命名为‘topFrame’。此外，第二个参数也可以是下列任何一个特殊的窗口名称：_self、_parent、_top或_blank</a></p>
+<p>#4、系统对话框 #<br>第一种最常用：</p>
+<p>alert(“Hello World!”);     通常使用alert()生成警告</p>
+<p>第二种：confirm()方法生成；除了确认对话框外，还有一个取消按钮；</p>
+<p>例如：confirm(“Are you sure?”);   </p>
+<p>confirm()方法会返回布尔值：true表示单击了OK，false表示单击了cancel或者单击了右上角的X按钮</p>
+<p>第三种：prompt()方法生成，为一个提示框，用于提示用户输入一些文本。提示框中除了显示OK和Cancel按钮之外，还会显示一个文本输入框，以供用户在其中输入内容。prompt()方法接受两个参数：要显示给用户的文本提示和文本输入域的默认值（可以是一个空字符串）</p>
+<p>例如：prompt(“What’s your name?”,”Michael”)</p>
+<p>如果用户单击了OK按钮，则prompt()返回文本输入框的值；如果用户单击了Cancel或没有单击OK而是通过其他方式关闭了对话框，则该方法返回null</p>
+<h1 id="5、location对象"><a href="#5、location对象" class="headerlink" title="5、location对象"></a>5、location对象</h1><p>window.location和document.location引用的是同一个对象</p>
+<table><br>    <tr><td>属性名</td><td>例子</td><td>说明</td></tr><br><tr><td>hash</td><td>“#contents”</td><td>返回URL中的hash(#号后跟零或多个字符)，如果URL中不包含散列，则返回空字符串</td></tr><br><tr><td>host</td><td>“www.wrox.com:80”</td><td>返回服务器名称和端口号（如果有</td></tr><br><tr><td>hostname</td><td>“www.wrox.com”</td><td>返回不带端口号的服务器名称</td></tr><br><tr><td>href</td><td>“http:/www.wrox.com”</td><td>返回当前加载页面的完整URL。而location对象的toString()方法也返回这个值</td></tr><br><tr><td>pathname</td><td>“/WileyCDA/“</td><td>返回URL中的目录和（或）文件名</td></tr><br><tr><td>port</td><td>“8080”</td><td>返回URL中指定的端口号。如果URL中不包含端口号，则这个属性返回空字符串</td></tr><br><tr><td>protocol</td><td>“http:”</td><td>返回页面使用的协议。通常是http:或https:</td></tr><br><tr><td>search</td><td>“?q=javascript”</td><td>返回URL的查询字符串。这个字符串以问号开头</td></tr><br><br></table>
+
+
+
+
+
+
+
+<p><strong>改变位置</strong></p>
+<p>使用location对象可以通过很多方式来改变浏览器的位置。首先，也是为常用的方式，就是使用assign()方法并为其传递一个URL</p>
+<p>location.assign(“<a href="http://www.wrox.com" target="_blank" rel="external">http://www.wrox.com</a>“);</p>
+<p>如果是将location.href或者window.location设置为一个URL的值，也会以该值调用assign()方法。例如：</p>
+<p>window.location = “<a href="http://www.wrox.com" target="_blank" rel="external">http://www.wrox.com</a>“;</p>
+<p>location.href = “<a href="http://www.wrox.com" target="_blank" rel="external">http://www.wrox.com</a>“;</p>
+<p>最常用的是设置location.href属性。</p>
+<h1 id="6、history对象"><a href="#6、history对象" class="headerlink" title="6、history对象"></a>6、history对象</h1><p>1、go()方法：可以在用户的历史记录中任意跳转，可以向后也可以向前。这个方法接受一个参数，表示向前后者向后跳转的页面数一个整数值。负数表示向后跳转（类似于单击浏览器的“后退”按钮），正数表示向前跳转（类似于单击浏览器的“前进”按钮）</p>
+<p>2、back()和forword()可以模拟浏览器的后退和前进按钮</p>
+<p>3、length属性，保存着历史记录的数量</p>
+<pre><code>history.go(-1);     //后退一页
+history.go(1);      //前进一页
+history.go(2);      //前进2页
+
+history.go(&quot;wrox.com&quot;);   //跳转到最近的wrox.com
+
+history.back();    //后退一页
+history.forword(); //前进一页
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/07/BOM/" data-id="cj8hahnn600003sm6wnh6sngm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/07/JavaScript中变量、作用域和内存问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaScript中变量、作用域和内存问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/07/BOM/">BOM</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/JavaScript中变量、作用域和内存问题/">JavaScript中变量、作用域和内存问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/">JavaScript中离线应用和客户端存储(cookies,sessionStorage,localStorage)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/关于自定义check-radio标签样式的方法/">关于自定义check-radio标签样式的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/css实现折叠面板/">css实现折叠面板</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

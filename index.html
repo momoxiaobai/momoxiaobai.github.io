@@ -61,6 +61,213 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-BOM" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/07/BOM/" class="article-date">
+  <time datetime="2017-10-07T12:13:28.000Z" itemprop="datePublished">2017-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/07/BOM/">BOM</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1、窗口位置</strong><br>用来确定和修改window对象位置的属性和方法有很多。IE、Safari、Opera和Chrome都提供了screenLeft和screenTop属性，分别用于表示窗口相对于屏幕左边和上边的位置。FireFox则在screenX和screenY属性中提供相同的窗口位置信息，Safari和Chrome也同时支持者两个属性。跨浏览器取得窗口左边和上边的位置代码：</p>
+<pre><code>var leftPos = (typeof window.screenLeft == &quot;number&quot;)?
+                        window.screenLeft : window.screenX;
+var topPos = (typeof window.screenTop == &quot;number&quot;)?
+                        window.screenTop : window.screenY;`
+移动窗口
+
+复制代码
+//将窗口移动到屏幕左上角
+window.moveTo(0,0);
+
+//将窗口向下移动100像素 
+window.moveBy(0,100);
+
+//将窗口移动到（200,300）
+window.moveTo(200,300);
+
+//将窗口想左移动50像素
+window.moveBy(-50,0);
+</code></pre><h1 id="2、窗口大小"><a href="#2、窗口大小" class="headerlink" title="2、窗口大小"></a>2、窗口大小</h1><p>IE9+、FireFox、Safari、Opera、Chrome均为此提供了4个属性：innerWidth、innerHeight、outerWidth和outerHeight。</p>
+<p>在IE9+、Safari和FireFox中，outerWidth和outerHeight返回浏览器本身的尺寸。在Opera中，这两个属性的值表示页面视图容器的大小，而innerWidth和innerHeight则表示该容器中页面视图区的大小（减去边框宽度）。在Chrome中，outerWidth、outerHeight与innerWidth和innerHeight返回相同的值，即视口大小而非浏览器窗口大小。</p>
+<p>在主流浏览器中，document.documentElement.clientWidth和document.documentElement.clientHeight中保存了页面视口的信息。</p>
+<p>在IE6中，这些属性必须在标准模式下才有效；如果是混杂模式，就必须通过document.body.clientWidth和document.body.clientHeight取得相同信息。</p>
+<p>取得页面视口的大小代码：</p>
+<pre><code>var pageWidth = window.innerWidth,
+      pageHeight = window.innerHeight;
+
+if(typeof pageWidth != &quot;number&quot;){
+
+       if(document.compatMode == &quot;CSS1Compat&quot;){
+                pageWidth = document.documentElement.clientWidht;
+                pageHeight = document.documentElement.clientHeight;
+        }else{
+                pageWidht = document.body.clientWidht;
+                pageHeight = docuemnt.body.clientHeight;
+         }
+}
+</code></pre><p>另外，使用resizeTo()和resizeBy()方法可以调整浏览器窗口的大小。</p>
+<pre><code>//调整到100X100
+window.resizeTo(100,100);
+
+//调整到200X150
+window.resizeBy(100,50);
+
+//调整到300X300
+window.resizeTo(300,300);
+</code></pre><p>#<br>3、导航和打开窗口 #<br>使用window.open()打开窗口既可以导航到一个特定的URL，也可以打开一个新的浏览器窗口。</p>
+<p>这个方法可以接收4个参数：要加载的URL、窗口目标、一个特性字符串以及一个表示新页面是否取代浏览器历史记录中当前加载页面的布尔值。</p>
+<p>如果为window.open()传递了第二个参数，而且该参数是已有窗口或框架的名称，那么就会在具有该名称的窗口或者框架中加载第一个参数指定的URL</p>
+<p>//等同于&lt;a href=”http”//www.wrof.com” target=”topFrame”&gt;<br>window.open(“<a href="http://www.wrox.com/&quot;,&quot;topFrame" target="_blank" rel="external">http://www.wrox.com/&quot;,&quot;topFrame</a>“);<br>调用这行代码，就如同用户单击了href属性为<a href="http://www.wrox.com/，target属性为“topFrame”的链接。如果有一个名叫“topFrame”的窗口或者框架，就会在该窗口或框架加载这个URL；否则，就会创建一个新窗口并将其命名为‘topFrame’。此外，第二个参数也可以是下列任何一个特殊的窗口名称：_self、_parent、_top或_blank" target="_blank" rel="external">http://www.wrox.com/，target属性为“topFrame”的链接。如果有一个名叫“topFrame”的窗口或者框架，就会在该窗口或框架加载这个URL；否则，就会创建一个新窗口并将其命名为‘topFrame’。此外，第二个参数也可以是下列任何一个特殊的窗口名称：_self、_parent、_top或_blank</a></p>
+<p>#4、系统对话框 #<br>第一种最常用：</p>
+<p>alert(“Hello World!”);     通常使用alert()生成警告</p>
+<p>第二种：confirm()方法生成；除了确认对话框外，还有一个取消按钮；</p>
+<p>例如：confirm(“Are you sure?”);   </p>
+<p>confirm()方法会返回布尔值：true表示单击了OK，false表示单击了cancel或者单击了右上角的X按钮</p>
+<p>第三种：prompt()方法生成，为一个提示框，用于提示用户输入一些文本。提示框中除了显示OK和Cancel按钮之外，还会显示一个文本输入框，以供用户在其中输入内容。prompt()方法接受两个参数：要显示给用户的文本提示和文本输入域的默认值（可以是一个空字符串）</p>
+<p>例如：prompt(“What’s your name?”,”Michael”)</p>
+<p>如果用户单击了OK按钮，则prompt()返回文本输入框的值；如果用户单击了Cancel或没有单击OK而是通过其他方式关闭了对话框，则该方法返回null</p>
+<h1 id="5、location对象"><a href="#5、location对象" class="headerlink" title="5、location对象"></a>5、location对象</h1><p>window.location和document.location引用的是同一个对象</p>
+<table><br>    <tr><td>属性名</td><td>例子</td><td>说明</td></tr><br><tr><td>hash</td><td>“#contents”</td><td>返回URL中的hash(#号后跟零或多个字符)，如果URL中不包含散列，则返回空字符串</td></tr><br><tr><td>host</td><td>“www.wrox.com:80”</td><td>返回服务器名称和端口号（如果有</td></tr><br><tr><td>hostname</td><td>“www.wrox.com”</td><td>返回不带端口号的服务器名称</td></tr><br><tr><td>href</td><td>“http:/www.wrox.com”</td><td>返回当前加载页面的完整URL。而location对象的toString()方法也返回这个值</td></tr><br><tr><td>pathname</td><td>“/WileyCDA/“</td><td>返回URL中的目录和（或）文件名</td></tr><br><tr><td>port</td><td>“8080”</td><td>返回URL中指定的端口号。如果URL中不包含端口号，则这个属性返回空字符串</td></tr><br><tr><td>protocol</td><td>“http:”</td><td>返回页面使用的协议。通常是http:或https:</td></tr><br><tr><td>search</td><td>“?q=javascript”</td><td>返回URL的查询字符串。这个字符串以问号开头</td></tr><br><br></table>
+
+
+
+
+
+
+
+<p><strong>改变位置</strong></p>
+<p>使用location对象可以通过很多方式来改变浏览器的位置。首先，也是为常用的方式，就是使用assign()方法并为其传递一个URL</p>
+<p>location.assign(“<a href="http://www.wrox.com" target="_blank" rel="external">http://www.wrox.com</a>“);</p>
+<p>如果是将location.href或者window.location设置为一个URL的值，也会以该值调用assign()方法。例如：</p>
+<p>window.location = “<a href="http://www.wrox.com" target="_blank" rel="external">http://www.wrox.com</a>“;</p>
+<p>location.href = “<a href="http://www.wrox.com" target="_blank" rel="external">http://www.wrox.com</a>“;</p>
+<p>最常用的是设置location.href属性。</p>
+<h1 id="6、history对象"><a href="#6、history对象" class="headerlink" title="6、history对象"></a>6、history对象</h1><p>1、go()方法：可以在用户的历史记录中任意跳转，可以向后也可以向前。这个方法接受一个参数，表示向前后者向后跳转的页面数一个整数值。负数表示向后跳转（类似于单击浏览器的“后退”按钮），正数表示向前跳转（类似于单击浏览器的“前进”按钮）</p>
+<p>2、back()和forword()可以模拟浏览器的后退和前进按钮</p>
+<p>3、length属性，保存着历史记录的数量</p>
+<pre><code>history.go(-1);     //后退一页
+history.go(1);      //前进一页
+history.go(2);      //前进2页
+
+history.go(&quot;wrox.com&quot;);   //跳转到最近的wrox.com
+
+history.back();    //后退一页
+history.forword(); //前进一页
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/07/BOM/" data-id="cj8hahnn600003sm6wnh6sngm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JavaScript中变量、作用域和内存问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/07/JavaScript中变量、作用域和内存问题/" class="article-date">
+  <time datetime="2017-10-07T12:10:10.000Z" itemprop="datePublished">2017-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/07/JavaScript中变量、作用域和内存问题/">JavaScript中变量、作用域和内存问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、变量"><a href="#一、变量" class="headerlink" title="一、变量"></a>一、变量</h1><p>（1）ECMAScript变量肯能包含两种不同的数据类型的值：基本类型值和引用类型值。基本类型值指的是简单的数据段，引用类型值指那些可能由多个值构成的对象。</p>
+<p>（2）基本数据类型是按值访问，可以操作保存在变量中的实际的值；引用类型的值是保存在内存中对象，操作对象时，实际上是在操作对象的引用而不是实际的对象，引用类型的值是按引用访问的。</p>
+<p>（3）传递参数。ECMScript中所有的函数的参数都是按值传递的。</p>
+<pre><code>function setName(obj){
+     obj.name = &quot;Nicholas&quot;;
+     obj = new Object();   //理解为新建一个对象，这个对象和参数obj的值不同，即在堆中地址不同，堆中值也不同，不是同一个对象
+     obj.name = &quot;Greg&quot;;   //函数执行完后，新建的obj被销毁。
+}
+
+var person = new Object();
+setName(person);
+alert(person.name);   //&quot;Nicholas&quot;
+</code></pre><p>当在函数内部重写obj时，这个变量引用的就是一个局部对象了。而这个局部对象会在函数执行完毕后立即被销毁。</p>
+<p>（4）instanceof操作符     如果变量时给定引用类型的实例，那么instanceof操作符始终会返回true；如果使用instanceof操作符检测基本类型的值，则操作符始终返回false；因为基本类型不是对象。</p>
+<h1 id="二、执行环境及作用域"><a href="#二、执行环境及作用域" class="headerlink" title="二、执行环境及作用域"></a>二、执行环境及作用域</h1><p>（1）执行环境是JavaScript中最为重要的一个概念。执行环境定义了变量或函数有权访问的其他数据，决定了它们各自的行为。每个执行环境都有一个与之关联的变量对象，环境中定义的所有变量和函数都保存在这个对象中。</p>
+<p>全局执行环境是最外围的一个执行环境。在web浏览器中，全局执行环境被认为是window对象。</p>
+<p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。作用域链的作用是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行的代码所在环境的变量对象。如果这个环境是函数，则将其活动对象作为变量对象。活动对象在最开始时只包含一个变量，即arguments对象（这个对象在全局环境中是不存在的）。全局执行环境的变量对象始终都是作用域链中的最后一个对象。</p>
+<p>（2）没有块级作用域</p>
+<pre><code>if(true){
+
+   var color = &quot;blue&quot;;
+}
+alert(color);   //blue;
+
+for(vari = 0; i &lt; 10;i++){
+  doSomething(i);
+
+}
+alert(i);   //10;
+</code></pre><p>对于JavaScript来说，由for语句创建的变量 i 即使在for循环执行结束后，也依旧会存在于循环外部的执行环境中。</p>
+<h1 id="三、垃圾收集"><a href="#三、垃圾收集" class="headerlink" title="三、垃圾收集"></a>三、垃圾收集</h1><p>（1）JavaScript具有自动垃圾收集机制。这种垃圾收集机制的原理其实很简单：找出那些不再继续使用的变量，然后释放其占用的内存。</p>
+<p>JavaScript中<strong>最常用的垃圾收集方式是标记清除</strong>。垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记。然后，它会去掉环境中的变量以及被环境中的变量引用的变量的标记。而在此之后再被加上标记的变量将被视为准备删除的变量。</p>
+<p>另一种不太常见的垃圾收集策略叫做引用计数。</p>
+<p>（2）管理内存</p>
+<p>JavaScript在进行内存管理及垃圾收集时面临的问题还是有点与众不同。其中最主要的一个问题，就是分配给web浏览器的可用内存数量通常要比分配给桌面应用程序的少。这样做的目的主要是出于安全方面考虑，目的是防止运行JavaScript的网页耗尽全部系统内存而导致系统崩溃。内存限制问题不仅会影响给变量分配内存，同时还会影响调用栈以及在一个线程中能够同时执行的语句数量。</p>
+<p>优化内存占用的最佳方式，就是为执行中的代码值保存必要的数据。一旦数据不再有用，最好通过将其值设置为null来释放其引用——这个做法叫做解除引用</p>
+<p>。这一做法使用于大多数全局变量和全局对象的属性。</p>
+<pre><code>function createPerson(name){
+
+     var localPerson = new Object();
+     localPerdon.name = name;
+     return localPerson;
+
+}
+
+var globalPerson = createPerson(&quot;Nicholas&quot;);
+
+//手工解除globalPerson的引用
+globalPerson = null;
+</code></pre><p>解除一个值的引用并不意味着自动挥手该值所占用的内存。解除引用的真正作用是让值脱离执行环境，以便垃圾收集器下次运行时将其回收。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/07/JavaScript中变量、作用域和内存问题/" data-id="cj8hahnnn00013sm6oi4x01o3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/" class="article-date">
@@ -131,7 +338,7 @@ dataStore.save(&quot;BookInfo&quot;);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/" data-id="cj8h9ym5400000sm6axougz32" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/" data-id="cj8hahnnz00023sm66z362l50" class="article-share-link">Share</a>
       
       
     </footer>
@@ -300,7 +507,7 @@ background-position:center;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/关于自定义check-radio标签样式的方法/" data-id="cj8h9ym6j00050sm6tm82y3ok" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/关于自定义check-radio标签样式的方法/" data-id="cj8hahnp200073sm6zgbdo4k3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -422,7 +629,7 @@ input:checked + label + .context{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/css实现折叠面板/" data-id="cj8h9ym5k00010sm6403e4fse" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/css实现折叠面板/" data-id="cj8hahno400033sm61vm7y5us" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,7 +673,7 @@ input:checked + label + .context{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/理解e-clientX-e-pageX-e-offsetX/" data-id="cj8h9ym6t00060sm6jxsof4bk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/理解e-clientX-e-pageX-e-offsetX/" data-id="cj8hahnp500083sm6uopkb347" class="article-share-link">Share</a>
       
       
     </footer>
@@ -505,7 +712,7 @@ input:checked + label + .context{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/01/hello-blog/" data-id="cj8h9ym5r00020sm6c1a14yca" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/01/hello-blog/" data-id="cj8hahno700043sm6lee6zmv0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -552,7 +759,7 @@ input:checked + label + .context{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/01/hello-world/" data-id="cj8h9ym5v00030sm6b2q1fhjw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/01/hello-world/" data-id="cj8hahnod00053sm6tqxqkejo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -606,6 +813,14 @@ input:checked + label + .context{
       <ul>
         
           <li>
+            <a href="/2017/10/07/BOM/">BOM</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/JavaScript中变量、作用域和内存问题/">JavaScript中变量、作用域和内存问题</a>
+          </li>
+        
+          <li>
             <a href="/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/">JavaScript中离线应用和客户端存储(cookies,sessionStorage,localStorage)</a>
           </li>
         
@@ -615,14 +830,6 @@ input:checked + label + .context{
         
           <li>
             <a href="/2017/10/07/css实现折叠面板/">css实现折叠面板</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/07/理解e-clientX-e-pageX-e-offsetX/">理解e.clientX,e.pageX,e.offsetX</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/01/hello-blog/">hello blog</a>
           </li>
         
       </ul>

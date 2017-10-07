@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript中变量、作用域和内存问题 | 小鹿的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、变量（1）ECMAScript变量肯能包含两种不同的数据类型的值：基本类型值和引用类型值。基本类型值指的是简单的数据段，引用类型值指那些可能由多个值构成的对象。 （2）基本数据类型是按值访问，可以操作保存在变量中的实际的值；引用类型的值是保存在内存中对象，操作对象时，实际上是在操作对象的引用而不是实际的对象，引用类型的值是按引用访问的。 （3）传递参数。ECMScript中所有的函数的参数都是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中变量、作用域和内存问题">
+<meta property="og:url" content="http://yoursite.com/2017/10/07/JavaScript中变量、作用域和内存问题/index.html">
+<meta property="og:site_name" content="小鹿的Blog">
+<meta property="og:description" content="一、变量（1）ECMAScript变量肯能包含两种不同的数据类型的值：基本类型值和引用类型值。基本类型值指的是简单的数据段，引用类型值指那些可能由多个值构成的对象。 （2）基本数据类型是按值访问，可以操作保存在变量中的实际的值；引用类型的值是保存在内存中对象，操作对象时，实际上是在操作对象的引用而不是实际的对象，引用类型的值是按引用访问的。 （3）传递参数。ECMScript中所有的函数的参数都是">
+<meta property="og:updated_time" content="2017-10-07T12:12:39.773Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中变量、作用域和内存问题">
+<meta name="twitter:description" content="一、变量（1）ECMAScript变量肯能包含两种不同的数据类型的值：基本类型值和引用类型值。基本类型值指的是简单的数据段，引用类型值指那些可能由多个值构成的对象。 （2）基本数据类型是按值访问，可以操作保存在变量中的实际的值；引用类型的值是保存在内存中对象，操作对象时，实际上是在操作对象的引用而不是实际的对象，引用类型的值是按引用访问的。 （3）传递参数。ECMScript中所有的函数的参数都是">
+  
+    <link rel="alternate" href="/atom.xml" title="小鹿的Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小鹿的Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaScript中变量、作用域和内存问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/07/JavaScript中变量、作用域和内存问题/" class="article-date">
+  <time datetime="2017-10-07T12:10:10.000Z" itemprop="datePublished">2017-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript中变量、作用域和内存问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、变量"><a href="#一、变量" class="headerlink" title="一、变量"></a>一、变量</h1><p>（1）ECMAScript变量肯能包含两种不同的数据类型的值：基本类型值和引用类型值。基本类型值指的是简单的数据段，引用类型值指那些可能由多个值构成的对象。</p>
+<p>（2）基本数据类型是按值访问，可以操作保存在变量中的实际的值；引用类型的值是保存在内存中对象，操作对象时，实际上是在操作对象的引用而不是实际的对象，引用类型的值是按引用访问的。</p>
+<p>（3）传递参数。ECMScript中所有的函数的参数都是按值传递的。</p>
+<pre><code>function setName(obj){
+     obj.name = &quot;Nicholas&quot;;
+     obj = new Object();   //理解为新建一个对象，这个对象和参数obj的值不同，即在堆中地址不同，堆中值也不同，不是同一个对象
+     obj.name = &quot;Greg&quot;;   //函数执行完后，新建的obj被销毁。
+}
+
+var person = new Object();
+setName(person);
+alert(person.name);   //&quot;Nicholas&quot;
+</code></pre><p>当在函数内部重写obj时，这个变量引用的就是一个局部对象了。而这个局部对象会在函数执行完毕后立即被销毁。</p>
+<p>（4）instanceof操作符     如果变量时给定引用类型的实例，那么instanceof操作符始终会返回true；如果使用instanceof操作符检测基本类型的值，则操作符始终返回false；因为基本类型不是对象。</p>
+<h1 id="二、执行环境及作用域"><a href="#二、执行环境及作用域" class="headerlink" title="二、执行环境及作用域"></a>二、执行环境及作用域</h1><p>（1）执行环境是JavaScript中最为重要的一个概念。执行环境定义了变量或函数有权访问的其他数据，决定了它们各自的行为。每个执行环境都有一个与之关联的变量对象，环境中定义的所有变量和函数都保存在这个对象中。</p>
+<p>全局执行环境是最外围的一个执行环境。在web浏览器中，全局执行环境被认为是window对象。</p>
+<p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。作用域链的作用是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行的代码所在环境的变量对象。如果这个环境是函数，则将其活动对象作为变量对象。活动对象在最开始时只包含一个变量，即arguments对象（这个对象在全局环境中是不存在的）。全局执行环境的变量对象始终都是作用域链中的最后一个对象。</p>
+<p>（2）没有块级作用域</p>
+<pre><code>if(true){
+
+   var color = &quot;blue&quot;;
+}
+alert(color);   //blue;
+
+for(vari = 0; i &lt; 10;i++){
+  doSomething(i);
+
+}
+alert(i);   //10;
+</code></pre><p>对于JavaScript来说，由for语句创建的变量 i 即使在for循环执行结束后，也依旧会存在于循环外部的执行环境中。</p>
+<h1 id="三、垃圾收集"><a href="#三、垃圾收集" class="headerlink" title="三、垃圾收集"></a>三、垃圾收集</h1><p>（1）JavaScript具有自动垃圾收集机制。这种垃圾收集机制的原理其实很简单：找出那些不再继续使用的变量，然后释放其占用的内存。</p>
+<p>JavaScript中<strong>最常用的垃圾收集方式是标记清除</strong>。垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记。然后，它会去掉环境中的变量以及被环境中的变量引用的变量的标记。而在此之后再被加上标记的变量将被视为准备删除的变量。</p>
+<p>另一种不太常见的垃圾收集策略叫做引用计数。</p>
+<p>（2）管理内存</p>
+<p>JavaScript在进行内存管理及垃圾收集时面临的问题还是有点与众不同。其中最主要的一个问题，就是分配给web浏览器的可用内存数量通常要比分配给桌面应用程序的少。这样做的目的主要是出于安全方面考虑，目的是防止运行JavaScript的网页耗尽全部系统内存而导致系统崩溃。内存限制问题不仅会影响给变量分配内存，同时还会影响调用栈以及在一个线程中能够同时执行的语句数量。</p>
+<p>优化内存占用的最佳方式，就是为执行中的代码值保存必要的数据。一旦数据不再有用，最好通过将其值设置为null来释放其引用——这个做法叫做解除引用</p>
+<p>。这一做法使用于大多数全局变量和全局对象的属性。</p>
+<pre><code>function createPerson(name){
+
+     var localPerson = new Object();
+     localPerdon.name = name;
+     return localPerson;
+
+}
+
+var globalPerson = createPerson(&quot;Nicholas&quot;);
+
+//手工解除globalPerson的引用
+globalPerson = null;
+</code></pre><p>解除一个值的引用并不意味着自动挥手该值所占用的内存。解除引用的真正作用是让值脱离执行环境，以便垃圾收集器下次运行时将其回收。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/07/JavaScript中变量、作用域和内存问题/" data-id="cj8hahnnn00013sm6oi4x01o3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/07/BOM/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          BOM
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaScript中离线应用和客户端存储(cookies,sessionStorage,localStorage)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/07/BOM/">BOM</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/JavaScript中变量、作用域和内存问题/">JavaScript中变量、作用域和内存问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/">JavaScript中离线应用和客户端存储(cookies,sessionStorage,localStorage)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/关于自定义check-radio标签样式的方法/">关于自定义check-radio标签样式的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/css实现折叠面板/">css实现折叠面板</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
