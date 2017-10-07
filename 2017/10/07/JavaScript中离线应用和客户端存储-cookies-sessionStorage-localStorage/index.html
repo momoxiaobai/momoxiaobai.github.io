@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript中离线应用和客户端存储(cookies,sessionStorage,localStorage) | 小鹿的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、离线应用所谓离线web应用，就是在设备不能上网的情况下仍然可以运行的应用。 开发离线web应用需要几个步骤：首先，确保应用知道设备是否能上网，以便下一步执行正确的操作；然后，应用还必须能访问一定的资源（图像、JavaScript、css等），只有这样才能正常工作；最后，必须有一块本地空间用于保存数据，无论能否上网都不妨碍读写。 ##1、离线检测 ##HTML5定义一个navigator.onL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中离线应用和客户端存储(cookies,sessionStorage,localStorage)">
+<meta property="og:url" content="http://yoursite.com/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/index.html">
+<meta property="og:site_name" content="小鹿的Blog">
+<meta property="og:description" content="一、离线应用所谓离线web应用，就是在设备不能上网的情况下仍然可以运行的应用。 开发离线web应用需要几个步骤：首先，确保应用知道设备是否能上网，以便下一步执行正确的操作；然后，应用还必须能访问一定的资源（图像、JavaScript、css等），只有这样才能正常工作；最后，必须有一块本地空间用于保存数据，无论能否上网都不妨碍读写。 ##1、离线检测 ##HTML5定义一个navigator.onL">
+<meta property="og:updated_time" content="2017-10-07T12:07:03.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中离线应用和客户端存储(cookies,sessionStorage,localStorage)">
+<meta name="twitter:description" content="一、离线应用所谓离线web应用，就是在设备不能上网的情况下仍然可以运行的应用。 开发离线web应用需要几个步骤：首先，确保应用知道设备是否能上网，以便下一步执行正确的操作；然后，应用还必须能访问一定的资源（图像、JavaScript、css等），只有这样才能正常工作；最后，必须有一块本地空间用于保存数据，无论能否上网都不妨碍读写。 ##1、离线检测 ##HTML5定义一个navigator.onL">
+  
+    <link rel="alternate" href="/atom.xml" title="小鹿的Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小鹿的Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/" class="article-date">
+  <time datetime="2017-10-07T12:02:52.000Z" itemprop="datePublished">2017-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript中离线应用和客户端存储(cookies,sessionStorage,localStorage)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、离线应用"><a href="#一、离线应用" class="headerlink" title="一、离线应用"></a>一、离线应用</h1><p>所谓离线web应用，就是在设备不能上网的情况下仍然可以运行的应用。</p>
+<p>开发离线web应用需要几个步骤：首先，确保应用知道设备是否能上网，以便下一步执行正确的操作；然后，应用还必须能访问一定的资源（图像、JavaScript、css等），只有这样才能正常工作；最后，必须有一块本地空间用于保存数据，无论能否上网都不妨碍读写。</p>
+<p>##<br>1、离线检测 ##<br>HTML5定义一个navigator.onLine属性，这个属性值为true表示设备能上网，值为false表示设备离线。</p>
+<p>除了navigator.onLine属性之外，HTML5还定义了两个事件：online和offline。当网络从离线变为在线或者从在线变为离线时，分别触发这两个事件。</p>
+<p>为了检测应用是否离线，在页面加载后，最好先通过navigator.onLine取得初始的状态。然后，就是通过上述两个事件来确定网络连接状态是否变化。当上述事件触发时，navigator.onLine属性的值也会改变，不过必须手工轮询这个属性才能检测到网络状态的变化。</p>
+<h2 id="2、应用缓存"><a href="#2、应用缓存" class="headerlink" title="2、应用缓存"></a>2、应用缓存</h2><p>HTML5的应用缓存，或者简称为appcache，是专门为开发离线Web应用而设计的。Appcache就是从浏览器的缓存中分出来的一块缓存区。</p>
+<h1 id="二、数据存储"><a href="#二、数据存储" class="headerlink" title="二、数据存储"></a>二、数据存储</h1><p><strong>1、cookie</strong><br><br>是在客户端用于存储会话信息的。该标准要求服务器对任意http请求发送Set-Cookie Http头作为响应头的一部分，其中包括会话信息。</p>
+<p>（1）限制</p>
+<p>cookie在性质上是绑定在特定的域名下的。当设定了一个cookie后，再创建它的域名发送请求时，都会包含这个cookie。</p>
+<p>由于cookie是存在客户端计算机上的，还加入了一些限制确保cookie不会被恶意使用，同时不会占用太多磁盘空间。</p>
+<p>1、IE6以及更低版本限制每个域名最多20个cookie</p>
+<p>2、IE7和之后版本每个域名最多50个。</p>
+<p>3、Firefox限制每个域最多50个cookie。</p>
+<p>4、Opera限制每个域最多30个cookie。</p>
+<p>5、Safari和Chrome对于每个域的cookie数量限制没有硬性规定。</p>
+<p>浏览器中对于cookie的尺寸也有限制。大多数浏览器都有大约4096B（加减1）的长度限制。为了最佳的浏览器兼容性，最好将整个cookie长度限制在4095B（含4095）</p>
+<p>以内。</p>
+<p><strong>2、IE用户数据</strong><br><br>在IE5.0中，微软通过一个自定义行为引入了持久化用户数据的概念。用户数据允许每个文档最多128KB数据，每个域名最多1MB数据。</p>
+<p>复制代码<br>    <div style="behavior:url(#default#userData)" id="dataStore"></div></p>
+<pre><code>var dataStore = document.getElementById(&quot;dataStore&quot;);
+dataStore.setAttribute(&quot;name&quot;,&quot;xiaolu&quot;);
+dataStore.setAttribute(&quot;book&quot;,&quot;javaScript&quot;);
+dataStore.save(&quot;BookInfo&quot;);
+</code></pre><p>在这段代码中，<div>元素上存入了两部分信息。在用setAttribute()存储数据之后，调用了save()方法，指定了数据空间的名称为BookInfo。下一次页面载入之后，可以使用load()方法指定同样的数据空间名称来获取数据；</div></p>
+<pre><code>dataStore.load(&quot;BookInfo&quot;);
+
+alert(dataStore.getAttribute(&quot;name&quot;));  //xiaolu
+alert(dataStore.getAttribute(&quot;book&quot;));   //javaScript
+</code></pre><p>复制代码<br>可以通过removeAttribute()方法明确指定要删除某元素数据，只要指定属性名称。删除之后，必须要再次调用save()来提交更改。</p>
+<pre><code>dataStore.removeAttribute(&quot;name&quot;,&quot;xiaolu&quot;);
+dataStore.removeAttribute(&quot;book&quot;,&quot;javaScript&quot;);
+dataStore.save(&quot;BookInfo&quot;);
+</code></pre><p>对IE用户数据的访问限制和对cookie的限制类似。要访问某个数据空间，脚本运行的页面必须来自同一个域名，在同一个路径下，并使用与进行存储的脚本同样的协议。</p>
+<p>和cookie不同的是，你无法将用户数据访问限制扩展到更多的客户。还有一点不同，用户数据默认是可以跨越会话持久存在的，同时也不会过期；数据需要通过removeAttribute()方法专门进行删除以释放空间。</p>
+<p>cookie和IE用户数据并非安全，所以不能存放敏感信息。</p>
+<h1 id="三、Web存储机制"><a href="#三、Web存储机制" class="headerlink" title="三、Web存储机制"></a>三、Web存储机制</h1><h2 id="1、sessionStorage对象"><a href="#1、sessionStorage对象" class="headerlink" title="1、sessionStorage对象"></a>1、sessionStorage对象</h2><p>sessionStorage对象存储特定于某个会话的数据，也就是该数据只保持到浏览器关闭。</p>
+<h2 id="2、localStorage对象"><a href="#2、localStorage对象" class="headerlink" title="2、localStorage对象"></a>2、localStorage对象</h2><p>要访问同一个localStorage对象，页面必须来自同一个域名（子域名无效），使用同一种协议，在同一个端口上。数据保留到通过JavaScript删除或者是用户清除浏览器缓存。</p>
+<p>限制：对于localStorage而言，大多数桌面浏览器会设置每个来源5MB的限制，Chrome和Safari对每个来源的限制是2.5MB。而iOS版的Safari和Android版的webkit的限制也是2.5MB</p>
+<p>对sessionStorage的贤惠也是因浏览器而异。有的浏览器对sessionStorage的大小没有限制，但Chrome、Safari、iOS版Safari和Android版Webkit都有限制，也就是2.5MB。IE8+和Opera对sessionStorage的限制是5MB。</p>
+<h2 id="3-indexedDB"><a href="#3-indexedDB" class="headerlink" title="3.indexedDB"></a>3.indexedDB</h2><p>是在浏览器中保存结构化数据的一种数据库。最大特色是使用对象保存数据，而不是使用表来保存数据。</p>
+<p><strong>Web storage 和cookie的区别</strong><br><br>Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。</p>
+<p>除此之外，Web Storage拥有setItem，getItem，removeItem，clear等方法，不像cookie需要前端开发者自己封装setCookie，getCookie。<br>但是Cookie是不可或缺的Lcookie的作用是和服务器进行交互，作为HTTP规范的一部分而存在，而Web Storage仅仅是为了在本地“存储”数据而生。</p>
+<p>浏览器的支持处理IE7及以下不支持外，其他标准浏览器都完全支持，值得一提的是，IE7、IE6中的userData其实就是JavaScript本地存储的解决方案。通过简单的代码封装可以统一到所有的浏览器都支持Web Storage</p>
+<p>localStorage和sessionStorage都具有相同的操作方法，例如setItem，getItem，removeItem等。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/" data-id="cj8h9ym5400000sm6axougz32" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/07/关于自定义check-radio标签样式的方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于自定义check-radio标签样式的方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/">JavaScript中离线应用和客户端存储(cookies,sessionStorage,localStorage)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/关于自定义check-radio标签样式的方法/">关于自定义check-radio标签样式的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/css实现折叠面板/">css实现折叠面板</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/07/理解e-clientX-e-pageX-e-offsetX/">理解e.clientX,e.pageX,e.offsetX</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/01/hello-blog/">hello blog</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
