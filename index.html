@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -195,7 +195,7 @@ var url = document.referrer;
 <p>注意：IE8以及低版本不区分ID的大小写，因此“myDiv”和“mydiv”会被当做相同的元素ID。</p>
 <p>如果页面中多个元素的ID值相同，getElementById()只返回文档中第一次出现的元素。IE7及较低版本还为此方法添加了一个有意思的“怪癖”：name特性与给定ID匹配的表单元素也会被该方法返回。如果有哪个表单元素的name特性等于指定的ID，而且该元素在文档中位于带有给定ID的冤死前面，那么IE就会返回那个表单元素。</p>
 <p><input type="text" name="myElement" value="Text field"></p>
-<div id="myElement">A div</div><br>基于上述代码，在IE7中调用document。getElementById(“myElement”)，结果会返回<input>元素；而在其他浏览器中，都会返回对<div>元素的引用。<br><br>2、getElementsByTagName();接收一个参数：即要取得元素的标签名，而返回的是包含零或多个元素的NodeList。<br><br>var images = document.getElementsByTagName(“img”);<br>与NodeList对象类似，可以使用方括号语法或者item()方法来访问HTMLCollection对象中的项。而这个对象中元素的数量则可以通过其length属性取得<br><br>    alert(images.length);  //输出图像的数量<br>    alert(images[0].src);   //输出第一个图像元素的src特性<br>    alert(images.item(0).src);   //输出第一个图像元素的src特性<br>HTMLCollection对象还有一个方法，叫做namedItem()，使用这个方法可以通过元素的name特性取得集合中的项。<br><br>    <img src="myimage.gif" name="myImage"><br>可以通过以下方式从images变量中取得这个<img>元素<br>var myImage = images.namedItem(“myImage”);<br>对命名的项也可以使用方括号语法来访问<br>var myImage = images.namedItem{[“myImage”];<br>可以向getElementsByTagName()中传入“<em>”。在JavaScript及css中，星号（“</em>”）通常表示全部。<br><br>var allElements = document.getElementsByTagName(“*”);包含整个页面的所有元素——按照它们出现的先后顺序。<br><br>3、getElementsByName()这个方法会返回带有给定name特性的所有元素<br><br>4、特殊集合<br><br>document.anchors  包含文档中所有带name特性的<a>元素<br><br>document.forms 包含文档中所有的<form>元素，与document.getElementsByTagName(“form”)得到的结果相同<br><br>document.images 包含文档中所有的<img>元素，与document.getElementsByTagName(“img”)得到的结果相同<br><br>document.links 包含文档中所有带href特性的<a>元素<br><br>## 10.1.3 element类型 ##<br>element类型是web编程中最常见的类型了。element类型用于表现xml或html元素，提供对元素标签名、子节点及特性的访问。<br><br>要访问元素的标签名，可以使用nodename属性，也可以使用tagname属性；这两个属性会返回相同的值。<br><br>    <div id="myDiv"></div>
+<div id="myElement">A div</div><br>基于上述代码，在IE7中调用document。getElementById(“myElement”)，结果会返回<input>元素；而在其他浏览器中，都会返回对<div>元素的引用。<br><br>2、getElementsByTagName();接收一个参数：即要取得元素的标签名，而返回的是包含零或多个元素的NodeList。<br><br>var images = document.getElementsByTagName(“img”);<br>与NodeList对象类似，可以使用方括号语法或者item()方法来访问HTMLCollection对象中的项。而这个对象中元素的数量则可以通过其length属性取得<br><br>    alert(images.length);  //输出图像的数量<br>    alert(images[0].src);   //输出第一个图像元素的src特性<br>    alert(images.item(0).src);   //输出第一个图像元素的src特性<br>HTMLCollection对象还有一个方法，叫做namedItem()，使用这个方法可以通过元素的name特性取得集合中的项。<br><br>    <img src="myimage.gif" name="myImage"><br>可以通过以下方式从images变量中取得这个<img>元素<br>var myImage = images.namedItem(“myImage”);<br>对命名的项也可以使用方括号语法来访问<br>var myImage = images.namedItem{[“myImage”];<br>可以向getElementsByTagName()中传入“<em>”。在JavaScript及css中，星号（“</em>”）通常表示全部。<br><br>var allElements = document.getElementsByTagName(“*”);包含整个页面的所有元素——按照它们出现的先后顺序。<br><br>3、getElementsByName()这个方法会返回带有给定name特性的所有元素<br><br>4、特殊集合<br><br>document.anchors  包含文档中所有带name特性的<a></a>元素<br><br>document.forms 包含文档中所有的<form>元素，与document.getElementsByTagName(“form”)得到的结果相同<br><br>document.images 包含文档中所有的<img>元素，与document.getElementsByTagName(“img”)得到的结果相同<br><br>document.links 包含文档中所有带href特性的<a></a>元素<br><br>## 10.1.3 element类型 ##<br>element类型是web编程中最常见的类型了。element类型用于表现xml或html元素，提供对元素标签名、子节点及特性的访问。<br><br>要访问元素的标签名，可以使用nodename属性，也可以使用tagname属性；这两个属性会返回相同的值。<br><br>    <div id="myDiv"></div>
 
 <pre><code>var div = document.getElementById(&quot;myDiv&quot;);
 alert(div.tagName);  //&quot;DIV&quot;
@@ -274,11 +274,11 @@ frament.appendChild(li);
 }
 
 ul.appendChild(fragment);
-</code></pre></a></form></a></div>
+</code></pre></form></div>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/DOM/" data-id="cj8hchozg0001w0m6niz4p7j0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/DOM/" data-id="cj8hcl2vc00010sm61gibdf30" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -391,7 +391,7 @@ history.forword(); //前进一页
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/BOM/" data-id="cj8hchoz20000w0m6hqyw5nfw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/BOM/" data-id="cj8hcl2uy00000sm60hzh9x14" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -477,7 +477,7 @@ globalPerson = null;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/JavaScript中变量、作用域和内存问题/" data-id="cj8hchozn0002w0m6aj0ipaip" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/JavaScript中变量、作用域和内存问题/" data-id="cj8hcl2vi00020sm6x9rtc3x7" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -557,7 +557,7 @@ dataStore.save(&quot;BookInfo&quot;);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/" data-id="cj8hchozs0003w0m6xsgdvbyh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/JavaScript中离线应用和客户端存储-cookies-sessionStorage-localStorage/" data-id="cj8hcl2vm00030sm664yjg6ve" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -726,7 +726,7 @@ background-position:center;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/关于自定义check-radio标签样式的方法/" data-id="cj8hchp0y0009w0m6uh03s785" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/关于自定义check-radio标签样式的方法/" data-id="cj8hcl2xh000a0sm68jjrnoeg" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -848,7 +848,7 @@ input:checked + label + .context{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/css实现折叠面板/" data-id="cj8hchp060005w0m66ix2vi4z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/css实现折叠面板/" data-id="cj8hcl2vp00040sm63kfosjh5" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -892,7 +892,7 @@ input:checked + label + .context{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/07/理解e-clientX-e-pageX-e-offsetX/" data-id="cj8hchp0u0008w0m6upvei298" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/07/理解e-clientX-e-pageX-e-offsetX/" data-id="cj8hcl2xq000b0sm6jhc4q8iv" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -931,7 +931,7 @@ input:checked + label + .context{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/01/hello-blog/" data-id="cj8hchozx0004w0m6xv0ge581" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/01/hello-blog/" data-id="cj8hcl2vv00050sm6ucxlmd2p" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -978,7 +978,7 @@ input:checked + label + .context{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/01/hello-world/" data-id="cj8hchp0p0007w0m6fedbm5eg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/01/hello-world/" data-id="cj8hcl2xw000c0sm6kza3t35j" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -998,7 +998,7 @@ input:checked + label + .context{
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
     </div>
@@ -1017,7 +1017,7 @@ input:checked + label + .context{
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
     </div>
@@ -1027,7 +1027,7 @@ input:checked + label + .context{
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
